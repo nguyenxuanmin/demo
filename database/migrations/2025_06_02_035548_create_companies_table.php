@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('logo')->nullable();
             $table->string('favicon')->nullable();
+            $table->string('map')->nullable();
             $table->timestamps();
         });
     }

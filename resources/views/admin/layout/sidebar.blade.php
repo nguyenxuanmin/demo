@@ -12,8 +12,8 @@
         <nav class="mt-2">
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="" class="nav-link active">
-                        <i class="nav-icon fa-solid fa-book-open"></i> <p>Danh sách khóa học</p>
+                    <a href="{{route('company')}}" class="nav-link active">
+                        <i class="nav-icon fa-solid fa-gear"></i> <p>Thông tin công ty</p>
                     </a>
                 </li>
             </ul>
