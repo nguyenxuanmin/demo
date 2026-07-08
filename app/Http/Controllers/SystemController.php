@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\User;
 use App\Services\AdminService;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 
 class SystemController extends Controller
@@ -71,13 +70,14 @@ class SystemController extends Controller
         }
 
         $nameAdmin = $request->nameAdmin;
+        $userNameAdmin = $request->userNameAdmin;
         $emailAdmin = $request->emailAdmin;
         $passWordAdmin = $request->passWordAdmin;
 
-        if (empty($nameAdmin) || empty($emailAdmin) || empty($passWordAdmin)) {
+        if (empty($nameAdmin) || empty($userNameAdmin) || empty($emailAdmin) || empty($passWordAdmin)) {
             return response()->json([
                 'success' => false,
-                'message' => 'Tên, email và mật khẩu không được để trống.',
+                'message' => 'Tên, tên đăng nhập, email và mật khẩu không được để trống.',
             ]);
         }
         if (!filter_var($emailAdmin, FILTER_VALIDATE_EMAIL)) {
@@ -104,7 +104,9 @@ class SystemController extends Controller
 
         $user = new User();
         $user->name = $nameAdmin;
+        $user->user_name = $userNameAdmin;
         $user->email = $emailAdmin;
+        $user->role = 'admin';
         $user->password = Hash::make($passWordAdmin);
         $user->save();
 

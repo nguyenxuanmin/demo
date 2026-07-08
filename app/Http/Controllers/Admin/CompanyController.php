@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Services\AdminService;
-use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
 {
@@ -15,8 +14,8 @@ class CompanyController extends Controller
         $this->adminService = new AdminService;
     }
 
-    public function index(){
-        $company = Company::all();
+    public function show(){
+        $company = Company::first();
         return view('admin.company.main',[
             'company' => $company
         ]);
@@ -39,26 +38,23 @@ class CompanyController extends Controller
             $favicon = "";
         }
         
-        if ($name == "") {
+        if (empty($name)) {
             return response()->json([
                 'success' => false,
                 'message' => 'Tên công ty không được để trống.'
             ]);
         }
 
-        $checkEmpty = Company::all();
-        if(count($checkEmpty) == 0){
-            $company = new Company();
-        }else{
-            $company = Company::find($checkEmpty[0]->id);
-        }
+        $company = Company::find($request->id);
 
-        if ($logo != "") {
-            if(count($checkEmpty) != 0){
-                $imagePath = 'company/logo/'.$checkEmpty[0]->logo;
-                if (Storage::exists($imagePath)) {
-                    Storage::delete($imagePath);
-                }
+        if (!empty($logo)) {
+            if (app()->environment('local')) {
+                $imagePath = public_path('storage/company/logo/' . $company->image);
+            } else {
+                $imagePath = base_path('../public_html/storage/company/logo/' . $company->logo);
+            }
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
             }
             $messageError = $this->adminService->generateImage($_FILES["logo"],'company/logo');
             if($messageError != ""){
@@ -68,17 +64,17 @@ class CompanyController extends Controller
                 ]);
             }
         }else{
-            if(count($checkEmpty) != 0){
-                $logo = $checkEmpty[0]->logo;
-            }
+            $logo = $company->logo;
         }
 
-        if ($favicon != "") {
-            if(count($checkEmpty) != 0){
-                $imagePath = 'company/favicon/'.$checkEmpty[0]->favicon;
-                if (Storage::exists($imagePath)) {
-                    Storage::delete($imagePath);
-                }
+        if (!empty($favicon)) {
+            if (app()->environment('local')) {
+                $imagePath = public_path('storage/company/favicon/' . $company->favicon);
+            } else {
+                $imagePath = base_path('../public_html/storage/company/favicon/' . $company->favicon);
+            }
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
             }
             $messageError = $this->adminService->generateImage($_FILES["favicon"],'company/favicon');
             if($messageError != ""){
@@ -88,9 +84,7 @@ class CompanyController extends Controller
                 ]);
             }
         }else{
-            if(count($checkEmpty) != 0){
-                $favicon = $checkEmpty[0]->favicon;
-            }
+            $favicon = $company->favicon;
         }
         
         $company->name = $name;
