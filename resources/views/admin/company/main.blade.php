@@ -27,23 +27,23 @@
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Tên công ty</label>
-                                    <input type="text" class="form-control" name="name" value="@if (count($company)){{$company[0]->name}}@endif">
+                                    <input type="text" class="form-control" name="name" value="{{$company->name}}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="address" class="form-label">Địa chỉ</label>
-                                    <input type="text" class="form-control" name="address" value="@if (count($company)){{$company[0]->address}}@endif">
+                                    <input type="text" class="form-control" name="address" value="{{$company->address}}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="hotline" class="form-label">Hotline</label>
-                                    <input type="text" class="form-control" name="hotline" value="@if (count($company)){{$company[0]->hotline}}@endif">
+                                    <input type="text" class="form-control" name="hotline" value="{{$company->hotline}}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="text" class="form-control" name="email" value="@if (count($company)){{$company[0]->email}}@endif">
+                                    <input type="text" class="form-control" name="email" value="{{$company->email}}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="map" class="form-label">Bản đồ</label>
-                                    <input type="text" class="form-control" name="map" value="@if (count($company)){{$company[0]->map}}@endif">
+                                    <input type="text" class="form-control" name="map" value="{{$company->map}}">
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
@@ -51,14 +51,14 @@
                                     <label for="logo" class="form-label">Logo</label>
                                     <input type="file" class="form-control mb-3" name="logo" id="logo" accept="image/*">
                                     <div class="logoContent">
-                                        <img id="logoContent" src="@if (count($company) && $company[0]->logo != ""){{asset('storage/company/logo/'.$company[0]->logo)}}@else{{asset('library/admin/default-image.png')}}@endif" alt="Logo preview" style="max-width: 100%; max-height: 150px;">
+                                        <img id="logoContent" src="@if (!empty($company->logo)){{asset('storage/company/logo/'.$company->logo)}}@else{{asset('library/admin/default-image.png')}}@endif" alt="Logo preview" style="max-width: 100%; max-height: 150px;">
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="favicon" class="form-label">Favicon</label>
                                     <input type="file" class="form-control mb-3" name="favicon" id="favicon" accept="image/*">
                                     <div class="faviconContent">
-                                        <img id="faviconContent" src="@if (count($company) && $company[0]->favicon != ""){{asset('storage/company/favicon/'.$company[0]->favicon)}}@else{{asset('library/admin/default-image.png')}}@endif" alt="Favicon preview" style="max-width: 100%; max-height: 100px;">
+                                        <img id="faviconContent" src="@if (!empty($company->favicon)){{asset('storage/company/favicon/'.$company->favicon)}}@else{{asset('library/admin/default-image.png')}}@endif" alt="Favicon preview" style="max-width: 100%; max-height: 100px;">
                                     </div>
                                 </div>
                             </div>

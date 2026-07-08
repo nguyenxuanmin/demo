@@ -14,12 +14,12 @@
             </li>
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                    <img src="@if(!empty(Auth::User()->avatar)){{asset('storage/users/'.Auth::User()->avatar)}}@else{{asset('library/admin/user-01.png')}}@endif" class="user-image rounded-circle shadow" alt="{{Auth::User()->name}}"/>
+                    <img src="{{asset('library/admin/user-01.png')}}" class="user-image rounded-circle shadow" alt="{{Auth::User()->name}}"/>
                     <span class="d-none d-md-inline">{{Auth::User()->name}}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                     <li class="user-header text-bg-primary">
-                        <img src="@if(!empty(Auth::User()->avatar)){{asset('storage/users/'.Auth::User()->avatar)}}@else{{asset('library/admin/user-01.png')}}@endif" class="rounded-circle shadow" alt="{{Auth::User()->name}}"/>
+                        <img src="{{asset('library/admin/user-01.png')}}" class="rounded-circle shadow" alt="{{Auth::User()->name}}"/>
                         <p>{{Auth::User()->name}}</p>
                     </li>
                     <li class="user-footer">

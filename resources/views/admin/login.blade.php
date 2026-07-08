@@ -15,7 +15,11 @@
     <body class="login-page bg-body-secondary">
         <div class="login-box">
             <div class="login-logo">
-                <b>{{$company->name}}</b>
+                @if (!empty($company->favicon))
+                    <img src="{{asset('storage/company/logo/'.$company->logo)}}" alt="{{$company->name}}" class="brand-image" />
+                @else
+                    <img src="{{asset('library/admin/AdminLTEFullLogo.png')}}" alt="AdminLTE Logo" class="brand-image" />
+                @endif
             </div>
             <div class="card">
                 <div class="card-body login-card-body">
