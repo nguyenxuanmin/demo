@@ -3,21 +3,6 @@ namespace App\Services;
 
 class AdminService
 {
-    public function generateSlug($title) {
-        $slug = strtolower($title);
-        $slug = preg_replace('~[áàạảãâấầậẩẫăắằặẳẵ]~u', 'a', $slug);
-        $slug = preg_replace('~[éèẹẻẽêếềệểễ]~u', 'e', $slug);
-        $slug = preg_replace('~[íìịỉĩ]~u', 'i', $slug);
-        $slug = preg_replace('~[óòọỏõôốồộổỗơớờợởỡ]~u', 'o', $slug);
-        $slug = preg_replace('~[úùụủũưứừựửữ]~u', 'u', $slug);
-        $slug = preg_replace('~[ýỳỵỷỹ]~u', 'y', $slug);
-        $slug = preg_replace('~[đ]~u', 'd', $slug);
-        $slug = preg_replace('/[^a-z0-9\s]/', '', $slug);
-        $slug = preg_replace('/\s+/', '-', $slug);
-        $slug = trim($slug, '-');
-        return $slug;
-    }
-
     public function generateImage($image,$folder) {
         $message = "";
         $targetFile = $folder.'/'. basename($image['name']);
